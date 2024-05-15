@@ -7,29 +7,21 @@ import { Authorize } from "../../domain/Decorator/authorize.decorator";
 import { RolesEnum } from "../../domain/Model/user.model";
 
 @Resolver(ExampleType)
-export class ExampleResolver{
-    constructor(
-        private getExampleUsecase: GetExampleUseCase,
-        private listExamplesUseCase: ListExamplesUseCase
-    ){
-        this.getExampleUsecase = new GetExampleUseCase();
-        this.listExamplesUseCase = new ListExamplesUseCase();
-    }
+export class ExampleResolver {
+  private getExampleUsecase = new GetExampleUseCase();
+  private listExamplesUseCase = new ListExamplesUseCase();
 
-    @Query(()=> ExampleType)
-    async getExample(
-        @Arg("exampleInput") exampleInput: ExampleInputType
-    ){
-        return this.getExampleUsecase.exec(exampleInput)
-    }
+  @Query(() => ExampleType)
+  async getExample(@Arg("exampleInput") exampleInput: ExampleInputType) {
+    return this.getExampleUsecase.exec(exampleInput);
+  }
 
-    @Query(()=>[ExampleType])
-    @Authorize({roles: [RolesEnum.Dev]})
-    async listExamples(
-        @Ctx() context:any,
-        @Arg("listExamplesInput") listExamplesInput: ExampleListInputType
-    ){
-        return this.listExamplesUseCase.exec(listExamplesInput)
-    }
-
+  @Query(() => [ExampleType])
+  @Authorize({ roles: [RolesEnum.Dev] })
+  async listExamples(
+    @Ctx() context: any,
+    @Arg("listExamplesInput") listExamplesInput: ExampleListInputType,
+  ) {
+    return this.listExamplesUseCase.exec(listExamplesInput);
+  }
 }
