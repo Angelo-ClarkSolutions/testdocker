@@ -1,5 +1,7 @@
 import { DataSource } from "typeorm";
-import { Example } from "../Entity/example.entity";
+import { resolve } from "path";
+
+const entitiesPath = resolve(__dirname, "../Entity/*.entity.{ts,js}");
 
 export const datasource = new DataSource({
   type: "mariadb",
@@ -10,7 +12,7 @@ export const datasource = new DataSource({
   database: "example",
   synchronize: true,
   logging: false,
-  entities: [Example],
+  entities: [entitiesPath],
   subscribers: [],
   migrations: [],
 });
