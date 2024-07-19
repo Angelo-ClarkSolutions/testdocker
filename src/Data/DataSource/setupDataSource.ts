@@ -10,9 +10,9 @@ export const datasource = new DataSource({
   username: "root",
   password: "root",
   database: "example",
-  synchronize: true,
+  synchronize: false,
   logging: false,
   entities: [entitiesPath],
   subscribers: [],
-  migrations: [],
+  migrations: ["src/Migrations/**/*.ts"],
 });

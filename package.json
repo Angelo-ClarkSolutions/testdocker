@@ -7,6 +7,10 @@
     "dev": "nodemon ./src/index.ts --exec ts-node ./src/index.ts",
     "test": "mocha --require ts-node/register src/test/**/*.test.ts",
     "typeorm": "typeorm-ts-node-commonjs",
+    "migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run -d ./src/Data/DataSource/setupDataSource.ts",
+    "migration:revert": "ts-node ./node_modules/typeorm/cli.js migration:revert -d ./src/Data/DataSource/setupDataSource.ts",
+    "migration:generate": "ts-node src/migrations/generateMigration.ts",
+    "migration:create": "npm run typeorm migration:create",
     "lint": "eslint src/**/*.ts",
     "format": "eslint src/**/*.ts --fix"
   },
