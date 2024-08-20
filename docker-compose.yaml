@@ -10,7 +10,7 @@ services:
       - "4000:4000"
 
   nginx:
-    image: angeloantolini014/nginx:latest
+    image: angeloantolini014/nginx:latestX
     container_name: nginx_proxy
     networks:
       - apollo_network
