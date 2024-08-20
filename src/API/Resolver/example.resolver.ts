@@ -7,7 +7,7 @@ import { Authorize } from "../../domain/Decorator/authorize.decorator";
 import { RolesEnum } from "../../domain/Model/user.model";
 
 @Resolver(ExampleType)
-export class ExampleResolver {
+export default class ExampleResolver {
   private getExampleUsecase = new GetExampleUseCase();
   private listExamplesUseCase = new ListExamplesUseCase();
 
@@ -18,10 +18,12 @@ export class ExampleResolver {
 
   @Query(() => [ExampleType])
   @Authorize({ roles: [RolesEnum.Dev] })
-  async listExamples(
-    @Ctx() context: any,
-    @Arg("listExamplesInput") listExamplesInput: ExampleListInputType,
-  ) {
+  async listExamples(@Ctx() context: any, @Arg("listExamplesInput") listExamplesInput: ExampleListInputType) {
     return this.listExamplesUseCase.exec(listExamplesInput);
+  }
+
+  @Query(() => String)
+  checkHealth(): string {
+    return "Alive";
   }
 }

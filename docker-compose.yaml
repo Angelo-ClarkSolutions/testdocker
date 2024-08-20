@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  apollo-server:
+    image: angeloantolini014/test:latest
+    container_name: app
+    networks:
+      - apollo_network
+    ports:
+      - "4000:4000"
+
+  nginx:
+    image: angeloantolini014/nginx:latestX
+    container_name: nginx_proxy
+    networks:
+      - apollo_network
+    ports:
+      - "80:80"
+      # - "443:443"  # Uncomment if you're using HTTPS
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+
+networks:
+  apollo_network:
+    driver: bridge
