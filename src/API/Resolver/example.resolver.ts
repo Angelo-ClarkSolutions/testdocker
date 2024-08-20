@@ -18,10 +18,12 @@ export default class ExampleResolver {
 
   @Query(() => [ExampleType])
   @Authorize({ roles: [RolesEnum.Dev] })
-  async listExamples(
-    @Ctx() context: any,
-    @Arg("listExamplesInput") listExamplesInput: ExampleListInputType,
-  ) {
+  async listExamples(@Ctx() context: any, @Arg("listExamplesInput") listExamplesInput: ExampleListInputType) {
     return this.listExamplesUseCase.exec(listExamplesInput);
+  }
+
+  @Query(() => String)
+  checkHealth(): string {
+    return "Alive";
   }
 }

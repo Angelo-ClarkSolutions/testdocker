@@ -27,6 +27,9 @@ export class SetupServer {
         }
         return decode(token);
       },
+      cors: {
+        origin: true,
+      },
     });
 
     return server;
@@ -35,9 +38,7 @@ export class SetupServer {
 
 export function loadResolvers(directory: string): Function[] {
   const files = readdirSync(directory);
-  const resolvers = files
-    .filter((file) => extname(file) === ".ts")
-    .map((file) => require(resolve(directory, file)).default);
+  const resolvers = files.filter((file) => extname(file) === ".ts" || extname(file) === ".js").map((file) => require(resolve(directory, file)).default);
 
   return resolvers;
 }
